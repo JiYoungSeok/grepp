@@ -1,0 +1,19 @@
+<h4>Course</h4>
+
+<ul>
+	<table class="highlight">
+		<thead>
+			<tr>
+				<th> Title </th>
+			</tr>
+		</thead>
+
+
+		<% @all_courses.each do |course| %>
+		<tbody>
+			<tr>
+				<td> <a href=<%= course.url %> target="_blank"> <%= course.title %> </td>
+			</tr>
+		</tbody>
+		<% end %>
+</ul>
