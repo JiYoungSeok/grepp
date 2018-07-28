@@ -8,7 +8,7 @@ module Crawling
 			doc = Nokogiri::HTML(open(url))
 
 			title = doc.css('div#item-header-content h1').text
-			num_of_students = doc.css('div.students').text.sub('명', '').to_i
+			student_count = doc.css('div.students').text.sub('명', '').to_i
 			price_area = doc.css('li.course_price')[0]
 			discount = doc.css('li.course_price').css('del')[0]
 
@@ -23,7 +23,7 @@ module Crawling
 				price = price_area.css('span.woocommerce-Price-amount')[1].text.sub('₩', '').sub(',', '').to_i
 			end
 
-			course = {'url' => url, 'title' => title, 'price' => price, 'num_of_students' => num_of_students}
+			course = {'url' => url, 'title' => title, 'price' => price, 'student_count' => student_count}
 
 			return course
 		rescue

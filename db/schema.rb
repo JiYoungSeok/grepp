@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_27_055426) do
+ActiveRecord::Schema.define(version: 2018_07_28_104306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,4 +22,13 @@ ActiveRecord::Schema.define(version: 2018_07_27_055426) do
     t.string "url"
   end
 
+  create_table "sales", force: :cascade do |t|
+    t.integer "price"
+    t.integer "student_count"
+    t.date "update_at"
+    t.bigint "course_id"
+    t.index ["course_id"], name: "index_sales_on_course_id"
+  end
+
+  add_foreign_key "sales", "courses"
 end
