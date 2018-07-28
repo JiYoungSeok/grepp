@@ -1,0 +1,22 @@
+<h4><%= params[:update_date] %></h4>
+
+<ul>
+	<table class="highlight">
+		<thead>
+			<tr>
+				<th> Title </th>
+				<th> 수강생 </th>
+				<th> 가격 </th>
+			</tr>
+		</thead>
+
+		<% @detail_daily_revenue.each do |course| %>
+		<tbody>
+			<tr>
+				<th> <a href=<%= course.url %> target="_blank"> <%= course.title %> </th>
+				<th> <%= course.student_count %> </th>
+				<th> <%= course.price %> </th>
+			</tr>
+		</tbody>
+		<% end %>
+</ul>

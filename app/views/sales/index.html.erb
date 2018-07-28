@@ -1,0 +1,22 @@
+<h4>Overview</h4>
+
+<ul>
+	<table class="highlight">
+		<thead>
+			<tr>
+				<th> 날짜 </th>
+				<th> 당일매출 </th>
+				<th> 회사매출 </th>
+			</tr>
+		</thead>
+
+		<% @overview_daily_revenue.each do |daily| %>
+		<tbody>
+			<tr>
+				<th> <%= link_to daily.update_at, detail_daily_revenue_path(daily.update_at) %> </th>
+				<th> ₩ <%= number_with_delimiter(daily.revenue, delimiter: ',') %> </th>
+				<th> ₩ <%= number_with_delimiter((daily.revenue * 0.3).to_i, delimiter: ',') %></th>
+			</tr>
+		</tbody>
+		<% end %>
+</ul>
