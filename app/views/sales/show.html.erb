@@ -7,6 +7,7 @@
 				<th> Title </th>
 				<th> 수강생 </th>
 				<th> 가격 </th>
+				<th> 매출 </th>
 			</tr>
 		</thead>
 
@@ -14,8 +15,10 @@
 		<tbody>
 			<tr>
 				<th> <a href=<%= course.url %> target="_blank"> <%= course.title %> </th>
-				<th> <%= course.student_count %> </th>
-				<th> <%= course.price %> </th>
+				<th> <%= number_with_delimiter(course.student_count, delimeter: ',') %> 명 </th>
+				<th> ₩ <%= number_with_delimiter(course.price, delimeter: ',') %> </th>
+				<th> ₩ <%= number_with_delimiter(course.revenue, delimeter: ',') %> </th>
+				<th> <%= link_to "상세보기", detail_course_path(course.id) %> </th>
 			</tr>
 		</tbody>
 		<% end %>

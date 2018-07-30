@@ -1,22 +1,41 @@
 <h4>Overview</h4>
 
 <ul>
-	<table class="highlight">
-		<thead>
-			<tr>
-				<th> 날짜 </th>
-				<th> 당일매출 </th>
-				<th> 회사매출 </th>
-			</tr>
-		</thead>
+	<div id="overview_revenue" style="float:left">
+		<table id="overview_revenue_table" class="highlight">
+			<thead>
+				<tr>
+					<th> 날짜 </th>
+					<th> 당일매출 </th>
+					<th> 회사매출 </th>
+				</tr>
+			</thead>
 
-		<% @overview_daily_revenue.each do |daily| %>
-		<tbody>
-			<tr>
-				<th> <%= link_to daily.update_at, detail_daily_revenue_path(daily.update_at) %> </th>
-				<th> ₩ <%= number_with_delimiter(daily.revenue, delimiter: ',') %> </th>
-				<th> ₩ <%= number_with_delimiter((daily.revenue * 0.3).to_i, delimiter: ',') %></th>
-			</tr>
-		</tbody>
-		<% end %>
+			<% @overview_daily_revenue.each do |daily| %>
+			<tbody>
+				<tr>
+					<th> <%= link_to daily.update_at, detail_daily_revenue_path(daily.update_at) %> </th>
+					<th> ₩ <%= number_with_delimiter(daily.revenue, delimiter: ',') %> </th>
+					<th> ₩ <%= number_with_delimiter((daily.revenue * 0.3).to_i, delimiter: ',') %></th>
+				</tr>
+			</tbody>
+			<% end %>
+		</table>
+	</div>
+
+	<div style="float:left">
+		<table id="monthly_revenue_predict_table" class="highlight">
+			<thead>
+				<tr>
+					<th> 월간매출예상 </th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					<th> ₩ <%= number_with_delimiter(@monthly_revenue_predict, delimiter: ',') %> </th>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </ul>

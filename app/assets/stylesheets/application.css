@@ -14,3 +14,15 @@
  *= require_tree .
  *= require_self
  */
+
+#overview_revenue {
+	margin:0px 200px 0px 0px;
+}
+
+#overview_revenue_table {
+	width:400px;
+}
+
+#monthly_revenue_predict_table {
+	width:150px;
+}
