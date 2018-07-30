@@ -1,2 +1,59 @@
-<h1>Courses#show</h1>
-<p>Find me in app/views/courses/show.html.erb</p>
+<head>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+    google.load('visualization', '1.1', {packages: ['corechart']});
+    google.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var data = new google.visualization.DataTable();
+
+      data.addColumn('string', '날짜');
+      data.addColumn('number', '수강생 변동');
+
+      '<% @course_student_change.each do |daily| %>'
+      var updateAt = '<%= daily.update_at %>';
+      var studentCount = '<%= daily.student_change %>';
+      data.addRows([[updateAt, parseInt(studentCount)]]);
+      '<% end %>'
+
+      var option = {
+        vAxis: {
+        	minValue: 0,
+        	format: 'decimal', 
+        	gridlines: { count: 2 }
+        },
+        width: 1000,
+        height: 400,
+        colors: ['black']
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('chart'));
+
+      chart.draw(data, option);
+    }
+
+  </script>
+</head>
+
+<div id="chart" style="float:left"></div>
+<div style="float:left">
+	<ul>
+		<table id="student_count_change_table" class="highlight">
+			<thead>
+				<tr>
+					<th> 날짜 </th>
+					<th> 누적 수강생 </th>
+				</tr>
+			</thead>
+
+			<% @course_student_change.each do |daily| %>
+			<tbody>
+				<tr>
+					<th>  <%= daily.update_at %> </th>
+					<th>  <%= number_with_delimiter(daily.student_count, delimiter: ',') %> 명</th>
+				</tr>
+			</tbody>
+			<% end %>
+		</table>
+	</ul>
+</div>
