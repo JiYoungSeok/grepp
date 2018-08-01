@@ -3,7 +3,7 @@ require "nokogiri"
 require 'selenium-webdriver'
 
 module Crawling
-	def parse_html(url)
+	def self.parse_html(url)
 		begin
 			doc = Nokogiri::HTML(open(url))
 
@@ -31,7 +31,7 @@ module Crawling
 		end
 	end
 
-	def get_current_page_number(driver)
+	def self.get_current_page_number(driver)
 		html = driver.page_source
 		doc = Nokogiri::HTML(html)
 
@@ -41,7 +41,7 @@ module Crawling
 		return current_page_number
 	end
 
-	def get_last_page_number(driver)
+	def self.get_last_page_number(driver)
 		html = driver.page_source
 		doc = Nokogiri::HTML(html)
 
@@ -50,7 +50,7 @@ module Crawling
 		return last_page_number
 	end
 
-	def get_each_page_courses_url(driver)
+	def self.get_each_page_courses_url(driver)
 		html = driver.page_source
 		doc = Nokogiri::HTML(html)
 		urls = []
@@ -64,7 +64,7 @@ module Crawling
 		return urls
 	end
 
-	def get_all_urls_by_selenium
+	def self.get_all_urls_by_selenium
 		options = Selenium::WebDriver::Chrome::Options.new
 		options.add_argument('--headless')
 		driver = Selenium::WebDriver.for :chrome, options: options
@@ -90,5 +90,19 @@ module Crawling
 
 		driver.quit
 		return all_urls
+	end
+
+	def self.auto_crawling
+		all_urls = get_all_urls_by_selenium
+
+		all_urls.each do|url|
+			course = parse_html(url)
+			new_course = Course.new(title: course['title'], url: course['url'])
+			new_course.save
+
+			course_id = Course.find_by(url: course['url'].downcase).id
+			new_sale = Sale.new(price: course['price'], student_count: course['student_count'], update_at: Time.now.strftime("%Y-%m-%d"), course_id: course_id)
+			new_sale.save
+		end
 	end
 end
