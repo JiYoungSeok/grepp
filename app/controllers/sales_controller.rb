@@ -11,7 +11,7 @@ class SalesController < ApplicationController
   		@overview_daily_revenue.each do |daily|
   			@monthly_revenue_predict += daily.revenue * 0.3
   		end
-  		# @monthly_revenue_predict = ((@monthly_revenue_predict / @overview_daily_revenue.size * 9 * 365) / (10 * 12)).to_i
+  		@monthly_revenue_predict = ((@monthly_revenue_predict / @overview_daily_revenue.size * 9 * 365) / (10 * 12)).to_i
  	end
 
   	def show
