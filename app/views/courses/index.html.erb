@@ -1,18 +1,22 @@
-<h4>Course</h4>
-
 <ul>
 	<table class="highlight">
 		<thead>
 			<tr>
 				<th> Title </th>
+				<th> 누적 파악 매출 </th>
+				<th> 누적 수강생 </th>
+				<th> 현재 가격 </th>
 			</tr>
 		</thead>
 
-
-		<% @all_courses.each do |course| %>
+		<% @detail_course_revenue.each do |course| %>
 		<tbody>
 			<tr>
-				<td> <a href=<%= course.url %> target="_blank"> <%= course.title %> </td>
+				<th> <a href=<%= course.url %> target="_blank"> <%= course.title %> </th>
+				<th> ₩ <%= number_with_delimiter(course.revenue, delimeter: ',') %> </th>
+				<th> <%= number_with_delimiter(course.student_count, delimeter: ',') %> 명 </th>
+				<th> ₩ <%= number_with_delimiter(course.price, delimeter: ',') %> </th>
+				<th> <%= link_to "상세보기", course_path(course.id) %> </th>
 			</tr>
 		</tbody>
 		<% end %>

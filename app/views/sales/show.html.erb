@@ -18,7 +18,7 @@
 				<th> <%= number_with_delimiter(course.student_count, delimeter: ',') %> 명 </th>
 				<th> ₩ <%= number_with_delimiter(course.price, delimeter: ',') %> </th>
 				<th> ₩ <%= number_with_delimiter(course.revenue, delimeter: ',') %> </th>
-				<th> <%= link_to "상세보기", detail_course_path(course.id) %> </th>
+				<th> <%= link_to "상세보기", course_path(course.id) %> </th>
 			</tr>
 		</tbody>
 		<% end %>

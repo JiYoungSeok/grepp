@@ -64,6 +64,17 @@ module Crawling
 		return urls
 	end
 
+	def self.sort_by_alphabetical(driver)
+		sort_xpath = "//li[@id='course-order-select']"
+		sort_btn = driver.find_element(:xpath => sort_xpath)
+		sort_btn.click
+		sleep(3)
+		sort_by_alphabetical_xpath = "//option[@value='alphabetical']"
+		sort_by_alphabetical_btn = driver.find_element(:xpath => sort_by_alphabetical_xpath)
+		sort_by_alphabetical_btn.click
+		sleep(3)
+	end
+
 	def self.get_all_urls_by_selenium
 		options = Selenium::WebDriver::Chrome::Options.new
 		options.add_argument('--headless')
@@ -71,8 +82,9 @@ module Crawling
 		all_urls = []
 
 		driver.get 'https://www.inflearn.com/all-courses/'
-		next_page_xpath = "//div[@id='course-dir-list']/div[@id='pag-top']/div[@class='pagination-links']/a[@class='next page-numbers']"
+		sort_by_alphabetical(driver)
 
+		next_page_xpath = "//div[@id='course-dir-list']/div[@id='pag-top']/div[@class='pagination-links']/a[@class='next page-numbers']"
 		last_page_number = get_last_page_number(driver)
 
 		while true
