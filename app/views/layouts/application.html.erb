@@ -18,6 +18,7 @@
       <div class="nav-wrapper black">
         <a href="/" style="margin-left: 50px; font-size: 30px">홈</a>
         <a href="/courses" style="margin-left: 70px; font-size: 30px">코스별</a>
+        <%= link_to "날짜별", detail_daily_revenue_path(Time.now.strftime("%Y-%m-%d")), style: "margin-left: 90px; font-size: 30px" %>
         <ul class="right hide-on-med-and-down">
           <li><a href="/courses/new">Update</a></li>
         </ul>

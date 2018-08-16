@@ -2,7 +2,7 @@ class CoursesController < ApplicationController
 	include Crawling
 
 	def index
-      	sql = "SELECT Courses.id, Courses.title, Courses.url, A.student_count, A.price, ((A.student_count - B.student_count) * A.price) AS revenue
+        sql = "SELECT Courses.id, Courses.title, Courses.url, A.student_count, A.price, ((A.student_count - B.student_count) * A.price) AS total_revenue
                FROM Courses, Sales A, Sales B
                WHERE Courses.id = A.course_id AND A.course_id = B.course_id AND A.update_at = B.update_at + interval '1 days'
                ORDER BY Courses.id DESC"

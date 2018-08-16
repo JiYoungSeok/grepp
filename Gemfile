@@ -5,6 +5,8 @@ ruby '2.3.7'
 
 gem 'nokogiri'
 gem 'selenium-webdriver'
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'bootstrap3-datetimepicker-rails'
 gem 'whenever', :require => false
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
