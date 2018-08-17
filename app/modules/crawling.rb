@@ -113,7 +113,14 @@ module Crawling
 			new_course.save
 
 			course_id = Course.find_by(url: course['url'].downcase).id
-			new_sale = Sale.new(price: course['price'], student_count: course['student_count'], update_at: Time.now.strftime("%Y-%m-%d"), course_id: course_id)
+			prev_student_count = Sale.find_by(course_id: course_id, update_at: Date.yesterday)
+			if prev_student_count
+				daily_revenue = (course['student_count'].to_i - prev_student_count.student_count.to_i) * course['price'].to_i
+				new_sale = Sale.new(price: course['price'], student_count: course['student_count'], update_at: Time.now.strftime("%Y-%m-%d"), daily_revenue: daily_revenue ,course_id: course_id)
+			else
+				new_sale = Sale.new(price: course['price'], student_count: course['student_count'], update_at: Time.now.strftime("%Y-%m-%d"),course_id: course_id)
+			end
+			
 			new_sale.save
 		end
 	end

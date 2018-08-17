@@ -2,8 +2,12 @@ class CoursesController < ApplicationController
 	include Crawling
 
 	def index
-        @detail_course_revenue = Course.joins(:sales).group(:course_id).sum(:daily_revenue)
-        @detail_course_revenue = Sale.group(:course_id).sum(:daily_revenue)
+        each_course_revenue = Sale.group(:course_id).sum(:daily_revenue)
+
+        each_course_revenue.each do |e|
+        	course = Course.find(e.course_id)
+
+        end
 	end
 
 	def new
