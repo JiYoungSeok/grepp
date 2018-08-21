@@ -1,23 +1,25 @@
 <ul>
-	<table class="highlight">
-		<thead>
-			<tr>
-				<th> Title </th>
-				<th> 누적 파악 매출 </th>
-				<th> 누적 수강생 </th>
-				<th> 현재 가격 </th>
-			</tr>
-		</thead>
+  <table class="highlight">
+    <thead>
+    <tr>
+      <th> Title</th>
+      <th> 누적 파악 매출</th>
+      <th> 누적 수강생</th>
+      <th> 현재 가격</th>
+    </tr>
+    </thead>
 
-		<% @detail_course_revenue.each do |course| %>
-		<tbody>
-			<tr>
-				<th> <a href=<%= course.url %> target="_blank"> <%= course.title %> </th>
-				<th> ₩ <%= number_with_delimiter(course.sum_daily_revenue, delimeter: ',') %> </th>
-				<th> <%= number_with_delimiter(course.student_count, delimeter: ',') %> 명 </th>
-				<th> ₩ <%= number_with_delimiter(course.price, delimeter: ',') %> </th>
-				<th> <%= link_to "상세보기", course_path(course.id) %> </th>
-			</tr>
-		</tbody>
-		<% end %>
+    <% @each_course_accumulated_revenue.each do |course| %>
+      <tbody>
+      <tr>
+        <% unless course.nil? %>
+          <th><a href=<%= course[:url] %> target="_blank"> <%= course[:title] %> </a></th>
+          <th> ₩ <%= number_with_delimiter(course[:accumulated_revenue], delimeter: ',') %> </th>
+          <th> <%= number_with_delimiter(course[:student_count], delimeter: ',') %> 명</th>
+          <th> ₩ <%= number_with_delimiter(course[:price], delimeter: ',') %> </th>
+          <th> <%= link_to "상세보기", course_path(course[:id]) %> </th>
+        <% end %>
+      </tr>
+      </tbody>
+    <% end %>
 </ul>
