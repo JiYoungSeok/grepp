@@ -1,4 +1,10 @@
-<h4>Overview</h4>
+<% if params[:site] == "inflearn" %>
+  <h4>인프런 매출분석</h4>
+<% else %>
+  <h4>구름에듀 매출분석</h4>
+<% end %>
+
+<%= link_to "코스별", show_by_course_path(params[:site]), class: "btn" %>
 
 <ul>
 	<div id="overview_revenue" style="float:left">
@@ -14,7 +20,7 @@
 			<% @overview_daily_revenue.each do |daily| %>
 			<tbody>
 				<tr>
-					<th> <%= link_to daily.update_at, detail_daily_revenue_path(daily.update_at) %> </th>
+					<th> <%= link_to daily.update_at, detail_daily_revenue_path(params[:site], daily.update_at) %> </th>
 					<th> ₩ <%= number_with_delimiter(daily.revenue, delimiter: ',') %> </th>
 					<th> ₩ <%= number_with_delimiter((daily.revenue * 0.3).to_i, delimiter: ',') %></th>
 				</tr>

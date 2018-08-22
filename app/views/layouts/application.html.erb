@@ -16,9 +16,9 @@
   <body>
     <nav>
       <div class="nav-wrapper black">
-        <a href="/" style="margin-left: 50px; font-size: 30px">홈</a>
-        <a href="/courses" style="margin-left: 50px; font-size: 30px">코스별</a>
-        <%= link_to "날짜별", detail_daily_revenue_path(Time.now.strftime("%Y-%m-%d")), style: "margin-left: 50px; font-size: 30px" %>
+        <%= link_to "Home",  root_path, style: "margin-left: 50px; font-size: 20px"%>
+        <%= link_to "Inflearn",  each_site_revenue_path("inflearn"), style: "margin-left: 50px; font-size: 20px"%>
+        <%= link_to "Goorm-edu",  each_site_revenue_path("goorm"), style: "margin-left: 50px; font-size: 20px"%>
         <ul class="right hide-on-med-and-down">
           <li><a href="/courses/new">Update</a></li>
         </ul>

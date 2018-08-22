@@ -1,8 +1,11 @@
 class SalesController < ApplicationController
+   def home
+   end
+
    def index
       sql = "SELECT A.update_at, SUM((A.student_count - B.student_count) * A.price) AS revenue
-               FROM Sales A, Sales B
-               WHERE A.course_id = B.course_id AND A.update_at = B.update_at + interval '1 days'
+               FROM Courses, Sales A, Sales B
+               WHERE Courses.site = '#{params[:site]}' AND Courses.id = A.course_id AND A.course_id = B.course_id AND A.update_at = B.update_at + interval '1 days'
                GROUP BY A.update_at
                ORDER BY A.update_at"
 
@@ -18,7 +21,7 @@ class SalesController < ApplicationController
    def show
       sql = "SELECT Courses.id, Courses.title, Courses.url, A.student_count, A.price, ((A.student_count - B.student_count) * A.price) AS revenue
                FROM Courses, Sales A, Sales B
-               WHERE Courses.id = A.course_id AND A.course_id = B.course_id AND A.update_at = B.update_at + interval '1 days' AND A.update_at = '#{params[:update_at]}'
+               WHERE Courses.site = '#{params[:site]}' AND Courses.id = A.course_id AND A.course_id = B.course_id AND A.update_at = B.update_at + interval '1 days' AND A.update_at = '#{params[:update_at]}'
                ORDER BY revenue DESC"
 
       @detail_daily_revenue = Course.find_by_sql(sql)

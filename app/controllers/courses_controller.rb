@@ -1,14 +1,13 @@
 class CoursesController < ApplicationController
-   include InflearnCrawling
-
    def index
       @each_course_accumulated_revenue = []
       @each_course_revenue = Sale.group(:course_id).sum(:daily_revenue).sort_by {|key, value| value}.reverse
       @each_course_revenue.each do |key, value|
-         course = Course.find(key)
+         course = Course.find_by(id: key,
+                                 site: params[:site])
          sale = Sale.find_by(course_id: key,
                              update_at: Time.now.strftime("%Y-%m-%d"))
-         unless sale.nil?
+         unless sale.nil? || course.nil?
             each_course = {id: key,
                            url: course.url,
                            title: course.title,
@@ -18,8 +17,6 @@ class CoursesController < ApplicationController
          end
          @each_course_accumulated_revenue << each_course
       end
-
-      puts @each_course_accumulated_revenue
    end
 
    def new

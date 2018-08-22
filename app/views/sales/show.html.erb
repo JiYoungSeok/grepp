@@ -1,7 +1,8 @@
 <h4><%= params[:update_at] %></h4>
 
-<input type="text" class="datepicker" placeholder="날짜 선택" value = <%= params[:update_at] %>>
+<input type="text" class="datepicker" value = <%= params[:update_at] %>>
 <script>
+  var site = '<%= params[:site] %>'
 	$(function() {
 		$( ".datepicker" ).datepicker({
 			dateFormat: 'yyyy-mm-dd',
@@ -9,7 +10,7 @@
 				var nextDate = date.getDate();
 				var nextMonth = date.getMonth()+1;
 				var nextYear = date.getFullYear();
-				window.location.replace("/sales/" + nextYear + '-' + nextMonth + '-' + nextDate);
+				window.location.replace("/sales/" + site + "/" + nextYear + '-' + nextMonth + '-' + nextDate);
 			}
 		});
 	})
