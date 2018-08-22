@@ -20,6 +20,7 @@
 # Learn more: http://github.com/javan/whenever
 
 set :environment, 'development'
-every :day, :at => '00:30 am' do
+every :day, :at => '00:05 am' do
 	runner "InflearnCrawling.inflearn_crawling"
+   runner "GoormCrawling.goorm_crawling"
 end

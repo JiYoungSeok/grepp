@@ -28,6 +28,7 @@ class CoursesController < ApplicationController
 
    def create
       InflearnCrawling.inflearn_crawling
+      GoormCrawling.goorm_crawling
       redirect_to "/"
    end
 
