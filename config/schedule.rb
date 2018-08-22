@@ -21,5 +21,5 @@
 
 set :environment, 'development'
 every :day, :at => '00:30 am' do
-	runner "Crawling.auto_crawling"
+	runner "InflearnCrawling.inflearn_crawling"
 end

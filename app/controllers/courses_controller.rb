@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-   include Crawling
+   include InflearnCrawling
 
    def index
       @each_course_accumulated_revenue = []
@@ -27,7 +27,7 @@ class CoursesController < ApplicationController
    end
 
    def create
-      Crawling.auto_crawling
+      InflearnCrawling.inflearn_crawling
       redirect_to "/"
    end
 
