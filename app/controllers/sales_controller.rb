@@ -7,7 +7,7 @@ class SalesController < ApplicationController
                FROM Courses, Sales A, Sales B
                WHERE Courses.site = '#{params[:site]}' AND Courses.id = A.course_id AND A.course_id = B.course_id AND A.update_at = B.update_at + interval '1 days'
                GROUP BY A.update_at
-               ORDER BY A.update_at"
+               ORDER BY A.update_at DESC"
 
       @overview_daily_revenue = Sale.find_by_sql(sql)
 

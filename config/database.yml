@@ -80,6 +80,8 @@ test:
 #
 production:
   <<: *default
-  database: grepp_production
-  username: grepp
-  password: <%= ENV['GREPP_DATABASE_PASSWORD'] %>
+  database: grepp_development
+  #database: grepp_production
+  #username: grepp
+  #password: oliver
+  #password: <%= ENV['GREPP_DATABASE_PASSWORD'] %>

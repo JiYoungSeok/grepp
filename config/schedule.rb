@@ -19,8 +19,14 @@
 
 # Learn more: http://github.com/javan/whenever
 
-set :environment, 'development'
-every :day, :at => '00:05 am' do
+#set :environment, 'development'
+#every :day, :at => '00:30 am' do
+	#runner "InflearnCrawling.inflearn_crawling"
+	#runner "GoormCrawling.goorm_crawling"
+#end
+
+set :environment, 'production'
+every :day, :at => '00:30 am' do
 	runner "InflearnCrawling.inflearn_crawling"
-   runner "GoormCrawling.goorm_crawling"
+	runner "GoormCrawling.goorm_crawling"
 end
