@@ -26,7 +26,7 @@
 #end
 
 set :environment, 'production'
-every :day, :at => '00:30 am' do
+every :day, :at => '00:02 am' do
 	runner "InflearnCrawling.inflearn_crawling"
 	runner "GoormCrawling.goorm_crawling"
 end
